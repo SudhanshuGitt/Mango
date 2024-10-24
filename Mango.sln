@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{53E9E4F9-CDD8-4D92-80DD-CC245E1595D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{B84D9B1D-B4C0-48BA-9544-1CB39B3A8B99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{3905E794-90DC-41CB-8C00-6720D6D3759E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3B66E95C-BBC4-4778-999A-5D8C5D642737}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.CouponAPI", "Mango.Services.CouponAPI\Mango.Services.CouponAPI.csproj", "{9AB79A75-E1AC-4A68-A1DD-42928113E538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Web", "Mango.Web\Mango.Web.csproj", "{CC616E42-B1E0-4CD1-A715-608BC1846841}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AB79A75-E1AC-4A68-A1DD-42928113E538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB79A75-E1AC-4A68-A1DD-42928113E538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB79A75-E1AC-4A68-A1DD-42928113E538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB79A75-E1AC-4A68-A1DD-42928113E538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC616E42-B1E0-4CD1-A715-608BC1846841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC616E42-B1E0-4CD1-A715-608BC1846841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC616E42-B1E0-4CD1-A715-608BC1846841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC616E42-B1E0-4CD1-A715-608BC1846841}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AB79A75-E1AC-4A68-A1DD-42928113E538} = {3B66E95C-BBC4-4778-999A-5D8C5D642737}
+		{CC616E42-B1E0-4CD1-A715-608BC1846841} = {53E9E4F9-CDD8-4D92-80DD-CC245E1595D6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19D5DBBF-1FF5-4F66-B655-0CF4FFBD5BD8}
+	EndGlobalSection
+EndGlobal
