@@ -2,6 +2,7 @@
 
 namespace Mango.Web.Models
 {
+    // it will have erverything when we send an request
     public class RequestDto
     {
         public ApiType ApiType { get; set; } = ApiType.GET;

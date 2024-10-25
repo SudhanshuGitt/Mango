@@ -7,8 +7,18 @@ using static Mango.Web.Utility.SD;
 
 namespace Mango.Web.Service
 {
+    /// <summary>
+    /// Dynamic servie to call all the API
+    /// </summary>
     public class BaseService : IBaseService
     {
+        /// <summary>
+        /// problem with the http client is there is overhead of instantiation as new http clent object is created
+        /// for every request
+        /// and HttpClient will hold open the socket that it used for some time after the request is completed
+        /// and this can lead to a socket exhaustion problem when your traffic increases.
+        /// </summary>
+
         private readonly IHttpClientFactory _httpClientFactory;
         public BaseService(IHttpClientFactory httpClientFactory)
         {
