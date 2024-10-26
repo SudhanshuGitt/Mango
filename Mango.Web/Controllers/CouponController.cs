@@ -50,13 +50,13 @@ namespace Mango.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CouponCreateUpdate(CouponDto model)
+        public async Task<IActionResult> CouponCreateUpdate(CouponDto coupon)
         {
             if (ModelState.IsValid)
             {
-                if (model.CouponId == 0)
+                if (coupon.CouponId == 0)
                 {
-                    ResponseDto? response = await _couponService.CreateCouponAsync(model);
+                    ResponseDto? response = await _couponService.CreateCouponAsync(coupon);
 
                     if (response != null && response.IsSuccess)
                     {
@@ -70,7 +70,7 @@ namespace Mango.Web.Controllers
                 }
                 else
                 {
-                    ResponseDto? response = await _couponService.UpdateCouponAsync(model);
+                    ResponseDto? response = await _couponService.UpdateCouponAsync(coupon);
 
                     if (response != null && response.IsSuccess)
                     {
@@ -84,7 +84,7 @@ namespace Mango.Web.Controllers
                 }
 
             }
-            return View(model);
+            return View(coupon);
         }
 
 
