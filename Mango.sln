@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.CouponAPI", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Web", "Mango.Web\Mango.Web.csproj", "{CC616E42-B1E0-4CD1-A715-608BC1846841}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.AuthAPI", "Mango.Services.AuthAPI\Mango.Services.AuthAPI.csproj", "{920DA15B-83CA-4BE3-878D-F0D23646CA0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.AuthAPI", "Mango.Services.AuthAPI\Mango.Services.AuthAPI.csproj", "{920DA15B-83CA-4BE3-878D-F0D23646CA0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.ProductAPI", "Mango.Services.ProductAPI\Mango.Services.ProductAPI.csproj", "{57557140-2427-4BB6-8DF9-92C45173A00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{920DA15B-83CA-4BE3-878D-F0D23646CA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920DA15B-83CA-4BE3-878D-F0D23646CA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920DA15B-83CA-4BE3-878D-F0D23646CA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57557140-2427-4BB6-8DF9-92C45173A00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57557140-2427-4BB6-8DF9-92C45173A00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57557140-2427-4BB6-8DF9-92C45173A00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57557140-2427-4BB6-8DF9-92C45173A00E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{9AB79A75-E1AC-4A68-A1DD-42928113E538} = {3B66E95C-BBC4-4778-999A-5D8C5D642737}
 		{CC616E42-B1E0-4CD1-A715-608BC1846841} = {53E9E4F9-CDD8-4D92-80DD-CC245E1595D6}
 		{920DA15B-83CA-4BE3-878D-F0D23646CA0B} = {3B66E95C-BBC4-4778-999A-5D8C5D642737}
+		{57557140-2427-4BB6-8DF9-92C45173A00E} = {3B66E95C-BBC4-4778-999A-5D8C5D642737}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19D5DBBF-1FF5-4F66-B655-0CF4FFBD5BD8}

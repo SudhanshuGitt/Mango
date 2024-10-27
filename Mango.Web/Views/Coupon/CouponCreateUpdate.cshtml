@@ -4,7 +4,7 @@
     <br />
     <div class="container border p-3">
         <h1 class="text-white text-center">
-            @(TempData["update"] == "update" ? "Update Coupon" : "Create Coupon")
+            @(ViewBag.Update ? "Update Coupon" : "Create Coupon")
         </h1>
         <input asp-for="CouponId" hidden />
         <hr />
@@ -36,7 +36,7 @@
                 <a asp-action="CouponIndex" class="btn-primary btn form-control ">Back to List</a>
             </div>
             <div class="col-5">
-                <input type="submit" value=@(TempData["update"] == "update" ? "Update" : "Create") class="btn btn-success form-control" />
+                <input type="submit" value=@(ViewBag.Update ? "Update" : "Create") class="btn btn-success form-control" />
             </div>
 
         </div>

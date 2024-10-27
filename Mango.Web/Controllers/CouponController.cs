@@ -41,11 +41,11 @@ namespace Mango.Web.Controllers
                 if (response != null && response.IsSuccess)
                 {
                     CouponDto? coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
-                    TempData["update"] = "update";
+                    ViewBag.Update = true;
                     return View(coupon);
                 }
             }
-
+            ViewBag.Update = false;
             return View();
         }
 
