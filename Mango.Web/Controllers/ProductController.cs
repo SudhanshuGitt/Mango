@@ -45,7 +45,7 @@ namespace Mango.Web.Controllers
                     return View(product);
                 }
             }
-            ViewBag.Update = false;
+
             return View();
         }
 
@@ -84,6 +84,7 @@ namespace Mango.Web.Controllers
                 }
 
             }
+            ViewBag.Update = false;
             return View(product);
         }
 

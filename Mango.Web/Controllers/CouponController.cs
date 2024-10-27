@@ -84,6 +84,7 @@ namespace Mango.Web.Controllers
                 }
 
             }
+            ViewBag.Update = false;
             return View(coupon);
         }
 
