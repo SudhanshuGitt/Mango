@@ -2,13 +2,26 @@
 {
     public class SD
     {
-        public static string CouponAPIBase { get; set; } = String.Empty;
+        public static string CouponAPIBase { get; set; } = string.Empty;
+        public static string AuthAPIBase { get; set; } = string.Empty;
+
+        //public const string RoleAdmin = "ADMIN";
+        //public const string RoleCustomer = "CUSTOMER";
+
+        public const string TokenCookie = "JWTToken";
+
+        public enum Role
+        {
+            ADMIN = 1,
+            CUSTOMER = 2
+        }
+
         public enum ApiType
         {
             GET,
-            POST, 
+            POST,
             PUT,
-            DELETE 
+            DELETE
         }
     }
 }
