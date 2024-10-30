@@ -11,7 +11,7 @@ namespace Mango.Services.AuthAPI.Controllers
     public class AuthAPIController : ControllerBase
     {
         private readonly IAuthService _authService;
-        protected ResponseDto _response;
+        private ResponseDto _response;
 
         public AuthAPIController(IAuthService authService)
         {
