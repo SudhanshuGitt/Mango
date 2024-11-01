@@ -11,7 +11,8 @@ namespace Mango.Services.OrderAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<OrderHeaderDto, CartHeaderDto>().ForMember(dest => dest.CartTotal, u => u.MapFrom(src => src.OrderTotal)).ReverseMap();
+                config.CreateMap<OrderHeaderDto, CartHeaderDto>()
+                .ForMember(dest => dest.CartTotal, u => u.MapFrom(src => src.OrderTotal)).ReverseMap();
 
                 config.CreateMap<CartDetailsDto, OrderDetailsDto>()
                 .ForMember(dest => dest.ProductName, u => u.MapFrom(src => src.Product.Name))

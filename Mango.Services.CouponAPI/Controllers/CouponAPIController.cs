@@ -88,6 +88,18 @@ namespace Mango.Services.CouponAPI.Controllers
                 Coupon coupon = _mapper.Map<Coupon>(couponDto);
                 _appDbContext.Coupons.Add(coupon);
                 _appDbContext.SaveChanges();
+
+
+
+                var options = new Stripe.CouponCreateOptions
+                {
+                    Name = coupon.CouponCode,
+                    Id = coupon.CouponCode,
+                    Currency = "usd",
+                    AmountOff = (long)(coupon.DiscountAmount * 100),
+                };
+                var service = new Stripe.CouponService();
+                service.Create(options);
                 _response.Result = _mapper.Map<CouponDto>(coupon);
             }
             catch (Exception ex)
@@ -127,6 +139,10 @@ namespace Mango.Services.CouponAPI.Controllers
                 Coupon coupon = _appDbContext.Coupons.First(d => d.CouponId == id);
                 _appDbContext.Remove(coupon);
                 _appDbContext.SaveChanges();
+
+                var service = new Stripe.CouponService();
+                service.Delete(coupon.CouponCode);
+               
             }
             catch (Exception ex)
             {

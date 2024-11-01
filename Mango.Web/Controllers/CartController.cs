@@ -1,5 +1,6 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
+using Mango.Web.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -45,8 +46,46 @@ namespace Mango.Web.Controllers
             if (response != null && response.IsSuccess)
             {
                 // get stripe session and redirect to stripe to  place order
+
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+
+                StripeRequestDto stripeRequestDto = new()
+                {
+                    ApprovedUrl = domain + "cart/Confirmation?orderId=" + orderHeaderDto.OrderHeaderId,
+                    CancelUrl = domain + "cart/checkout",
+                    OrderHeader = orderHeaderDto,
+                };
+
+                var stripeResponse = await _orderService.CreateStripeSession(stripeRequestDto);
+                StripeRequestDto stripeResponseResult = JsonConvert.DeserializeObject<StripeRequestDto>(Convert.ToString(stripeResponse.Result));
+
+                // we need to redirect to a url so it can take us to stripe checkout page
+                Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+
+                // it denotes that there is redict
+                return new StatusCodeResult(303);
             }
             return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            ResponseDto response = await _orderService.ValidateStripeSession(orderId);
+
+            if (response != null && response.IsSuccess)
+            {
+                OrderHeaderDto orderHeader = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(response.Result));
+
+                if (orderHeader.Status == ((byte)SD.OrderStatus.APPROVED))
+                {
+
+                    return View(orderId);
+                }
+                // redirect to error page based on status
+
+            }
+            return View(orderId);
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId)
