@@ -10,7 +10,12 @@ namespace Mango.MessageBus
 {
     public class MessageBus : IMessageBus
     {
-        private readonly string connectionString = "Add azure service bus connection string";
+        private readonly string connectionString = "";
+
+        //In the queue the FIFO first message send by client will recived by the reciever(point to point communication)
+        //if there are multitple recivers who want to recive the message for that there is topic and subscription (publish subscriber senario)
+        // when we publish a message there can be more than one sunbscribers in an queue
+        // we will send messgae to topic and topic will have multitple subscription
         public async Task PublishMessage(object message, string topic_queue_Name)
         {
             await using var client = new ServiceBusClient(connectionString);

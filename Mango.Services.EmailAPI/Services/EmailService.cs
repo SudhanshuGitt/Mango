@@ -1,6 +1,7 @@
 ﻿using Mango.Services.EmailAPI.Data;
 using Mango.Services.EmailAPI.Models;
 using Mango.Services.EmailAPI.Models.Dto;
+using Mango.Services.EmailAPI.Models.Message;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 
@@ -37,6 +38,14 @@ namespace Mango.Services.EmailAPI.Services
             message.Append("</ul>");
 
             await LogAndEmail(message.ToString(), cartDto.CartHeader.Email);
+
+        }
+
+        public async Task LogPlacedOrder(RewardMessage rewardMessage)
+        {
+
+            string message = "The order placed, <br/> Email : " + rewardMessage.OrderId;
+            await LogAndEmail(message, "Admin@qwe.com");
 
         }
 
