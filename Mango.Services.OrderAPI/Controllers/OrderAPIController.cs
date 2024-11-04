@@ -10,6 +10,7 @@ using Mango.Services.OrderAPI.Utility;
 using Stripe;
 using Stripe.Checkout;
 using Mango.MessageBus;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.OrderAPI.Controllers
 {
@@ -37,6 +38,92 @@ namespace Mango.Services.OrderAPI.Controllers
         }
 
         [Authorize]
+        [HttpGet("GetOrders/{userId?}")]
+        public async Task<ResponseDto> Get(string? userId = "")
+        {
+            try
+            {
+                IEnumerable<OrderHeader> orderHeaders;
+
+                if (User.IsInRole(((byte)SD.Role.ADMIN).ToString()))
+                {
+                    orderHeaders = _appDbContext.OrderHeaders.Include(u => u.OrderDetails).OrderByDescending(u => u.OrderHeaderId).ToList();
+                }
+                else
+                {
+                    orderHeaders = _appDbContext.OrderHeaders.Include(u => u.OrderDetails).Where(u => u.UserId == userId).OrderByDescending(u => u.OrderHeaderId).ToList();
+                }
+                _response.Result = _mapper.Map<IEnumerable<OrderHeaderDto>>(orderHeaders);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
+
+        [Authorize]
+        [HttpGet("GetOrder/{orderId:int}")]
+        public async Task<ResponseDto> Get(int orderId)
+        {
+            try
+            {
+                OrderHeader orderHeader = _appDbContext.OrderHeaders.Include(u => u.OrderDetails).First(u => u.OrderHeaderId == orderId);
+                _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
+
+        [Authorize]
+        [HttpPost("UpdateOrderStatus/{orderId:int}")]
+        public async Task<ResponseDto> UpdateOrderStatus(int orderId, [FromBody] byte newStatus)
+        {
+            try
+            {
+                OrderHeader orderHeader = await _appDbContext.OrderHeaders.FirstAsync(o => o.OrderHeaderId == orderId);
+
+                if (orderHeader != null)
+                {
+                    if (newStatus == (byte)SD.OrderStatus.CANCELLED)
+                    {
+                        // we will give refund
+                        var option = new RefundCreateOptions
+                        {
+                            Reason = RefundReasons.RequestedByCustomer,
+                            PaymentIntent = orderHeader.PaymentIntentId,
+
+                        };
+
+                        var service = new RefundService();
+                        Refund refund = service.Create(option);
+
+
+                    }
+
+                    orderHeader.Status = newStatus;
+                    await _appDbContext.SaveChangesAsync();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
+
+        [Authorize]
         [HttpPost("CreateOrder")]
         public async Task<ResponseDto> CreateOrder([FromBody] CartDto cartDto)
         {
@@ -59,7 +146,9 @@ namespace Mango.Services.OrderAPI.Controllers
                 _response.Message = ex.Message;
             }
             return _response;
+
         }
+
 
         [Authorize]
         [HttpPost("CreateStripeSession")]
@@ -130,6 +219,7 @@ namespace Mango.Services.OrderAPI.Controllers
 
         }
 
+
         [Authorize]
         [HttpPost("VaildateStripeSession")]
         public async Task<ResponseDto> VaildateStripeSession([FromBody] int orderHeaderId)
@@ -158,7 +248,7 @@ namespace Mango.Services.OrderAPI.Controllers
                     };
                     string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
 
-                    await _messageBus.PublishMessage(rewardDto, topicName) ;
+                    await _messageBus.PublishMessage(rewardDto, topicName);
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
                 }
 

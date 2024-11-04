@@ -32,6 +32,7 @@
             COMPLETED = 4,
             REFUNDED = 5,
             CANCELLED = 6,
+            ALL=0
         }
     }
 }

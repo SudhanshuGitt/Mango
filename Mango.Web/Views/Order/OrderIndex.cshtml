@@ -1,0 +1,73 @@
+﻿@using Mango.Web.Utility
+
+@{
+
+    string status = Context.Request.Query["status"].ToString();
+    var approved = "";
+    var readyforpickup = "";
+    var cancelled = "";
+    var all = "";
+
+    SD.OrderStatus statusEnum;
+
+    switch (Enum.TryParse<SD.OrderStatus>(status, out statusEnum) ? statusEnum : SD.OrderStatus.ALL)
+    {
+        case (SD.OrderStatus.APPROVED):
+            approved = "active text-white bg-secondary";
+            break;
+        case (SD.OrderStatus.READYFORPICUP):
+            readyforpickup = "active text-white bg-secondary";
+            break;
+        case (SD.OrderStatus.CANCELLED):
+            cancelled = "active text-white bg-secondary";
+            break;
+        default:
+            all = "active text-white bg-secondary";
+            break;
+
+    }
+
+}
+
+<div class="card shadow mt-4 border-0">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3 d-flex justify-content-between">
+        <div class="row">
+            <h1 class="text-white"> Order List</h1>
+        </div>
+        <ul class="list-group list-group-horizontal-sm pt-2">
+            <a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="@(SD.OrderStatus.APPROVED)">
+            <li class="list-group-item @approved">Approved</li>
+            </a>
+
+            <a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="@(SD.OrderStatus.READYFORPICUP)">
+            <li class="list-group-item @readyforpickup">Ready For Pikcup</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="@(SD.OrderStatus.CANCELLED)">
+            <li class="list-group-item @cancelled">Cancelled</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="@(SD.OrderStatus.ALL)">
+            <li class="list-group-item @all">All</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="card-body p-4">
+        <table id="orderTable" class="table table-bordered table-striped pt-3" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Order.js"></script>
+}
