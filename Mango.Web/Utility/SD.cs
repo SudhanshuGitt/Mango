@@ -34,5 +34,11 @@
             CANCELLED = 6,
             ALL=0
         }
+
+        public enum ContentType
+        {
+            Json,
+            MutipartFormData
+        }
     }
 }

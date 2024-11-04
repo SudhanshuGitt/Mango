@@ -45,13 +45,14 @@ namespace Mango.Web.Controllers
                     return View(product);
                 }
             }
-
+            ViewBag.Update = false;
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ProductCreateUpdate(ProductDto product)
         {
+            ViewBag.Update = product.ProductId == 0 ? false : true;
             if (ModelState.IsValid)
             {
                 if (product.ProductId == 0)
@@ -67,11 +68,11 @@ namespace Mango.Web.Controllers
                     {
                         TempData["error"] = response?.Message;
                     }
+
                 }
                 else
                 {
                     ResponseDto? response = await _productService.UpdateProductAsync(product);
-
                     if (response != null && response.IsSuccess)
                     {
                         TempData["success"] = "Product updated successfully!";
@@ -81,10 +82,11 @@ namespace Mango.Web.Controllers
                     {
                         TempData["error"] = response?.Message;
                     }
+
                 }
 
             }
-            ViewBag.Update = false;
+
             return View(product);
         }
 

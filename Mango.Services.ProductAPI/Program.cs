@@ -38,7 +38,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+// ass wwwroot folder was not present by default we need to tell the api
+// there will be some static files and look for them when runnning the project
+// now application will go to wwwrootfolder
+app.UseStaticFiles();
 app.MapControllers();
 ApplyMigration();
 app.Run();
