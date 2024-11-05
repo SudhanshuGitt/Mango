@@ -19,6 +19,10 @@ optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCon
 
 builder.Services.AddSingleton(new EmailService(optionBuilder.Options));
 
+builder.Services.AddHostedService<RabbitMQAuthConsumer>();
+builder.Services.AddHostedService<RabbitMQCartConsumer>();
+builder.Services.AddHostedService<RabbitMQOrderConsumer>();
+
 // we canot consume scoped service in singleton implmentaiton
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 builder.Services.AddControllers();
