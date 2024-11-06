@@ -1,4 +1,6 @@
-﻿namespace Mango.Services.OrderAPI.Models.Dto
+﻿using Mango.Services.OrderAPI.Utility;
+
+namespace Mango.Services.OrderAPI.Models.Dto
 {
     public class OrderHeaderDto
     {
@@ -17,5 +19,15 @@
         public string? PaymentIntentId { get; set; }
         public string? StripeSessionId { get; set; }
         public IEnumerable<OrderDetailsDto> OrderDetails { get; set; }
+        //Computed String
+        public string? StatusName
+        {
+
+            get
+            {
+                return ((SD.OrderStatus)Status).ToString();
+            }
+
+        }
     }
 }

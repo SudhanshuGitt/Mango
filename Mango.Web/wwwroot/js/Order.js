@@ -40,7 +40,7 @@ function loadDatatable(status) {
             { "data": "email", "name": "Eamil", "autoWidth": true },
             { "data": "name", "name": "Name", "autoWidth": true },
             { "data": "phone", "name": "Phone", "autoWidth": true },
-            { "data": "statusString", "name": "Status", "autoWidth": true },
+            { "data": "statusName", "name": "Status", "autoWidth": true },
             { "data": "orderTotal", "name": "Total", "autoWidth": true },
             {
                 "data": "orderHeaderId",

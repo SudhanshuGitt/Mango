@@ -12,9 +12,7 @@
         public string? Email { get; set; }
         public DateTime OrderTime { get; set; }
         public byte Status { get; set; }
-
-        public string? StatusString { get; set; }
-
+        public string? StatusName { get; set; }
         // will be using stripe for payment we need to store some id
         public string? PaymentIntentId { get; set; }
         public string? StripeSessionId { get; set; }
