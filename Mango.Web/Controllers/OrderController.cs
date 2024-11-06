@@ -84,8 +84,6 @@ namespace Mango.Web.Controllers
                 orders = new List<OrderHeaderDto>();
             }
 
-            orders.ToList().ForEach(u => u.StatusString = ((SD.OrderStatus)u.Status).ToString());
-
             return Json(new { data = orders });
 
         }
